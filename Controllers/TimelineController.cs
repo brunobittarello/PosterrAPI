@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PosterrAPI.Dtos;
+using PosterrAPI.Interfaces;
 
 namespace PosterrAPI.Controllers
 {
@@ -12,28 +13,21 @@ namespace PosterrAPI.Controllers
     [Route("[controller]")]
     public class TimelineController : ControllerBase
     {
+        private readonly IMessageService _messageService;
         private readonly ILogger<TimelineController> _logger;
 
-        public TimelineController(ILogger<TimelineController> logger)
+        public TimelineController(IMessageService messageService, ILogger<TimelineController> logger)
         {
+            _messageService = messageService;
             _logger = logger;
         }
 
         [HttpGet]
-        public IEnumerable<MessageDto> Get()
+        public IEnumerable<MessageDto> Get(int page)
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => FakeMessage())
-            .ToArray();
+            return _messageService.GetMessages(page);
         }
 
-        public MessageDto FakeMessage()
-        {
-            return new MessageDto() {
-              Id = 0,
-              Text = Faker.Lorem.Sentence(4),
-              UserName = Faker.Name.First()
-            };
-        }
+        
     }
 }
