@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using PosterrAPI.Databases;
 using PosterrAPI.Interfaces;
 using PosterrAPI.Services;
 
@@ -28,7 +29,8 @@ namespace PosterrAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IMessageService, MessageService>();
+            services.AddScoped<DataContext, SqliteDataContext>();
+            services.AddScoped<IPostService, PostService>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

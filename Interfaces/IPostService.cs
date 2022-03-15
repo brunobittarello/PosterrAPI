@@ -3,8 +3,8 @@ using PosterrAPI.Dtos;
 
 namespace PosterrAPI.Interfaces
 {
-    public interface IMessageService
+    public interface IPostService
     {
-        public List<MessageDto> GetMessages(int page);
+        public IEnumerable<PostDto> GetPosts(int page);
     }
 }

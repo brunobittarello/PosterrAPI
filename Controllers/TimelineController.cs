@@ -13,19 +13,19 @@ namespace PosterrAPI.Controllers
     [Route("[controller]")]
     public class TimelineController : ControllerBase
     {
-        private readonly IMessageService _messageService;
+        private readonly IPostService _postService;
         private readonly ILogger<TimelineController> _logger;
 
-        public TimelineController(IMessageService messageService, ILogger<TimelineController> logger)
+        public TimelineController(IPostService postService, ILogger<TimelineController> logger)
         {
-            _messageService = messageService;
+            _postService = postService;
             _logger = logger;
         }
 
         [HttpGet]
-        public IEnumerable<MessageDto> Get(int page)
+        public IEnumerable<PostDto> Get(int page)
         {
-            return _messageService.GetMessages(page);
+            return _postService.GetPosts(page);
         }
 
         

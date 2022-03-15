@@ -1,8 +1,10 @@
+using System;
+
 namespace PosterrAPI.Dtos
 {
-    public class MessageDto
+    public class PostDto
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string UserName { get; set; }
         public string Text { get; set; }
     }
