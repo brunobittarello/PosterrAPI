@@ -28,7 +28,7 @@ namespace PosterrAPI.Controllers
             return _userService.GetFollowers(page);
         }
 
-        [HttpPost]
+        [HttpPost("{id}")]
         public ActionResult AddFollower(Guid id)
         {
             var result = _userService.AddFollow(id);
@@ -37,7 +37,7 @@ namespace PosterrAPI.Controllers
             return BadRequest();
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public ActionResult Remove(Guid id)
         {
             var result = _userService.RemoveFollow(id);

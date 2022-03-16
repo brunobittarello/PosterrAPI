@@ -39,7 +39,7 @@ namespace PosterrAPI.Services
         public bool AddFollow(Guid userId)
         {
             var user = GetCurrentUser();
-            if (user.Id == userId)
+            if (userId == Guid.Empty || user.Id == userId)
                 return false;
 
             var follow = _dbContext.Followes.SingleOrDefault(f => f.UserId == user.Id && f.UserFollowedId == userId);
@@ -55,6 +55,9 @@ namespace PosterrAPI.Services
         public bool RemoveFollow(Guid userId)
         {
             var user = GetCurrentUser();
+            if (userId == Guid.Empty || user.Id == userId)
+                return false;
+
             var follow = _dbContext.Followes.SingleOrDefault(f => f.UserId == user.Id && f.UserFollowedId == userId);
             if (follow == null)
                 return false;
