@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PosterrAPI.Dtos;
 using PosterrAPI.Interfaces;
+using PosterrAPI.Services;
 
 namespace PosterrAPI.Controllers
 {
@@ -23,11 +22,36 @@ namespace PosterrAPI.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<PostDto> Get(int page)
+        public IEnumerable<PostDto> Get(int page, TimelineSubject subject = TimelineSubject.All)
         {
-            return _postService.GetPosts(page);
+            return _postService.GetPosts(page, subject);
         }
 
-        
+        [HttpPost]
+        public ActionResult Post(string message)
+        {
+            var result = _postService.CreatePost(message);
+            if (result)
+                return Ok();
+            return BadRequest();
+        }
+
+        [HttpPost("quote")]
+        public ActionResult PostQuote(Guid id, string message)
+        {
+            var result = _postService.CreateQuote(id, message);
+            if (result)
+                return Ok();
+            return BadRequest();
+        }
+
+        [HttpPost("repost")]
+        public ActionResult PostRepost(Guid id)
+        {
+            var result = _postService.CreateRepost(id);
+            if (result)
+                return Ok();
+            return BadRequest();
+        }
     }
 }
