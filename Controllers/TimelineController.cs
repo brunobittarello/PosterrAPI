@@ -22,9 +22,21 @@ namespace PosterrAPI.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<PostDto> Get(int page, TimelineSubject subject = TimelineSubject.All)
+        public IEnumerable<PostDto> GetAll(int page)
         {
-            return _postService.GetPosts(page, subject);
+            return _postService.GetPosts(page, TimelineSubject.All);
+        }
+
+        [HttpGet("followers")]
+        public IEnumerable<PostDto> GetFollowers(int page)
+        {
+            return _postService.GetPosts(page, TimelineSubject.Followers);
+        }
+
+        [HttpGet("user")]
+        public IEnumerable<PostDto> GetUser(int page)
+        {
+            return _postService.GetPosts(page, TimelineSubject.User);
         }
 
         [HttpPost]

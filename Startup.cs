@@ -30,6 +30,7 @@ namespace PosterrAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<DataContext, SqliteDataContext>();
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IPostService, PostService>();
 
             services.AddControllers();

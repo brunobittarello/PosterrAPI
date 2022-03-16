@@ -30,8 +30,9 @@ namespace PosterrAPI.Services
         {
             var posts = GetPostsFromSubject(subject)            
                 .OrderByDescending(p => p.CreatedAt)
-                .Skip(page * PAGE_SIZE)
-                .Take(PAGE_SIZE).ToList();
+                .Skip((page - 1) * PAGE_SIZE)
+                .Take(PAGE_SIZE)
+                .ToList();
             return posts.Select(m => PostToDto(m));
         }
 
@@ -125,8 +126,8 @@ namespace PosterrAPI.Services
 
         private IEnumerable<Post> GetPostsFromFollowers()
         {
-            var followers = new List<Guid>();
-            return _dbContext.Posts.Include("User").Where(p => followers.Contains(p.UserId));
+            var followers = _userService.GetAllFollowers().ToArray();
+            return _dbContext.Posts.Include("User").Where(p => followers.Any(f => f.Id == p.User.Id));
         }
 
         private IEnumerable<Post> GetPostsFromUser()

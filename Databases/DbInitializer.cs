@@ -1,6 +1,6 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
-using PosterrAPI.Databases;
 using PosterrAPI.Entities;
 
 namespace PosterrAPI.Databases
@@ -19,14 +19,21 @@ namespace PosterrAPI.Databases
 
             var users = Enumerable.Range(1, 20).Select(index => FakeUser());
             context.Users.AddRange(users);
+            context.SaveChanges();
 
+            users = context.Users.ToList();
             var random = new Random();
-            var userTotal = users.Count();
-            var posts = Enumerable.Range(1, 300).Select(index => FakeMessage(users.ElementAt(random.Next(0, userTotal))));
+            var posts = new List<Post>();
+            foreach (var user in users) {
+                posts.AddRange(Enumerable.Range(1, random.Next(10, 20)).Select(index => FakeMessage(user)));
+            }
             context.Posts.AddRange(posts);
 
-            var mainUser = users.ElementAt(0);
-            var follow = Enumerable.Range(1, 10).Select(index => new Follow() { User = mainUser, UserFollowed = users.ElementAt(index), AddedAt = DateTime.Now });
+            var mainUser = context.Users.First();
+            mainUser.UserName = "Bruno";
+            context.Users.Update(mainUser);
+            var followers = Enumerable.Range(1, 10).Select(index => new Follow() { User = mainUser, UserFollowed = users.ElementAt(index), AddedAt = DateTime.Now });
+            context.Followes.AddRange(followers);
 
             context.SaveChanges();
         }
