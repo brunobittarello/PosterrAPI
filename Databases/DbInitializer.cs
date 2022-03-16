@@ -25,7 +25,7 @@ namespace PosterrAPI.Databases
             var random = new Random();
             var posts = new List<Post>();
             foreach (var user in users) {
-                posts.AddRange(Enumerable.Range(1, random.Next(10, 20)).Select(index => FakeMessage(user)));
+                posts.AddRange(Enumerable.Range(1, random.Next(10, 20)).Select(index => FakePost(user)));
             }
             context.Posts.AddRange(posts);
 
@@ -48,7 +48,7 @@ namespace PosterrAPI.Databases
             };
         }
 
-        private static Post FakeMessage(User user)
+        private static Post FakePost(User user)
         {
             return new Post()
             {
