@@ -1,3 +1,16 @@
+# Disclaimer
+
+This project is my test for Strider. The test says it can be done in 8h, I think it is very inaccurate. You need to read all documents, implement a API, validations, tests, DB architecture and documentation for futures features. It is too much. This is what I done in approximately 8h, it is very incomplete for what is asked. Here are the assessments for that dumb test:
+
+[Strider Web Back-end Assessment - 2.3](https://github.com/brunobittarello/PosterrAPI/blob/main/Assessment/Strider%20Web%20Back-end%20Assessment%20-%202.3.pdf)
+
+[Strider Technical Assessment Briefing](https://github.com/brunobittarello/PosterrAPI/blob/main/Assessment/Strider%20Technical%20Assessment%20Briefing.pdf)
+
+
+
+Here is the readme asked: 
+
+
 # PosterrAPI
 Strider Web Back-end Assessment - 2.3
 
