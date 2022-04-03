@@ -1,6 +1,8 @@
 # PosterrAPI
 Strider Web Back-end Assessment - 2.3
 
+dotnet ef migrations add InitialCreate --context SqliteDataContext --output-dir Migrations
+
  # Planning
 
  ## Questions
